@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIMPLE LTF — Portal de Servicios</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <strong>SIMPLE LTF</strong><br />
+        <small>Portal de Servicios — Prototipo</small>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <button id="langToggle" class="btn small" aria-pressed="false">ES</button>
+  </header>
+
+  <main id="mainContent" tabindex="-1" class="layout">
+    <!-- Landing -->
+    <section id="landingView" class="view active card">
+      <h2>Servicios</h2>
+      <div class="tiles">
+        <button type="button" class="tile" data-target="asesoria">
+          <h3>Asesoría Legal</h3>
+          <p>Consultas por materia y tipo</p>
+        </button>
+        <button type="button" class="tile" data-target="permisos">
+          <h3>Permisos</h3>
+          <p>Ambiental, construcción, armas, espectáculos</p>
+        </button>
+        <button type="button" class="tile" data-target="dued">
+          <h3>Due Diligence</h3>
+          <p>Listas y verificación</p>
+        </button>
+        <button type="button" class="tile" data-target="docs">
+          <h3>Generación de Documentos</h3>
+          <p>DGII, ONAPI, Cámara, modelos</p>
+        </button>
+        <button type="button" class="tile" data-target="empresa">
+          <h3>Creación de Empresa</h3>
+          <p>SRL, SA, EIRL, ONG</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Formulario -->
+    <section id="formView" class="view card" hidden>
+      <div class="form-head">
+        <div class="chips">
+          <span class="chip" id="chipCategory">—</span>
+          <span class="chip alt" id="chipSub">—</span>
+        </div>
+        <div class="form-head-actions">
+          <button id="backToLanding" class="btn ghost">← Volver</button>
+          <button id="toggleSidebar" class="btn ghost" aria-expanded="true">☰ Bandeja</button>
+        </div>
+      </div>
+
+      <h2 id="formTitle">Formulario</h2>
+
+      <form id="serviceForm" class="grid" novalidate>
+        <div id="dynamicSteps" class="grid"></div>
+
+        <div class="field full">
+          <label for="name">Nombre</label>
+          <input id="name" required placeholder="Nombre y apellido" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" required placeholder="correo@ejemplo.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="phone">Teléfono</label>
+          <input id="phone" type="tel" required placeholder="(809) 000-0000" inputmode="tel" autocomplete="tel" />
+        </div>
+        <div class="field full">
+          <label for="org">Organización (opcional)</label>
+          <input id="org" placeholder="Empresa / organización" autocomplete="organization" />
+        </div>
+
+        <div class="field full">
+          <label id="descLabel" for="desc">Descripción</label>
+          <textarea id="desc" rows="4" placeholder="Describa brevemente su caso o solicitud"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="attachments">Adjuntos (opcional)</label>
+          <input id="attachments" type="file" multiple accept=".pdf,.docx,.jpg,.jpeg,.png" />
+          <small id="fileErrors" class="hint"></small>
+        </div>
+
+        <div class="actions full">
+          <button type="submit" class="btn primary">Enviar</button>
+          <button type="button" id="copyEmailBtn" class="btn gold">Copiar correo</button>
+          <button type="button" id="previewBtn" class="btn">Previsualizar</button>
+        </div>
+      </form>
+
+      <dialog id="previewDialog">
+        <header class="dialog-head">
+          <strong>Previsualización</strong>
+          <button id="closePreview" class="btn small">Cerrar</button>
+        </header>
+        <pre id="previewContent" class="code"></pre>
+      </dialog>
+    </section>
+
+    <!-- Bandeja / Inbox -->
+    <aside id="inboxAside" class="side card">
+      <div class="side-head">
+        <h3>Bandeja <small class="muted">(<span id="inboxCount">0</span>)</small></h3>
+        <div class="side-tools">
+          <button id="exportJSON" class="btn small">Exportar JSON</button>
+          <button id="exportCSV" class="btn small">Exportar CSV</button>
+          <button id="clearAll" class="btn small">Vaciar</button>
+        </div>
+      </div>
+      <ul id="inboxList" class="inbox"></ul>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
