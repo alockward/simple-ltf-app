@@ -55,9 +55,11 @@ export default async function handler(req, res) {
     // Intentar obtener el archivo actual
     const existingRes = await fetch(apiUrl, {
       headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github+json'
-      }
+  Authorization: `token ${token}`,
+  'User-Agent': 'simple-ltf-app',
+  'Content-Type': 'application/json', // solo para la llamada PUT
+  Accept: 'application/vnd.github+json'
+}
     });
     if (existingRes.ok) {
       const data = await existingRes.json();
@@ -85,10 +87,11 @@ export default async function handler(req, res) {
     const updateRes = await fetch(apiUrl, {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/vnd.github+json'
-      },
+  Authorization: `token ${token}`,
+  'User-Agent': 'simple-ltf-app',
+  'Content-Type': 'application/json', // solo para la llamada PUT
+  Accept: 'application/vnd.github+json'
+},
       body: JSON.stringify(updateBody)
     });
     if (!updateRes.ok) {
